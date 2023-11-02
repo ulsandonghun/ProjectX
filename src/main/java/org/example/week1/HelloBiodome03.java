@@ -19,7 +19,7 @@ public class HelloBiodome03 {
         }
 
         double result;
-        double cal=calculate(sqrt(d[1]),d[0]);
+        double cal=calculate(sqrt(d[1],d[1]/2),d[0]);
         result=health(0.415,cal,d[2]/(pie*pie));
 
         System.out.println(result);
@@ -28,15 +28,25 @@ public class HelloBiodome03 {
 
     }
 
-    public static double sqrt(double num) {
-        System.out.println("루트 넘버 = " + Math.sqrt(num));
-        return Math.sqrt(num);
+    public static double sqrt(double num,double next) {
+        double e = 1e-7;
+        double diff = next * next - num;
+        if (diff < 0) diff = -diff;
+
+        if (diff < e) {
+            return next;
+        } else {
+            return sqrt(num, (next + num / next) / 2.0);
+        }
+
     }
 
-    public static double calculate(double a, double b) {
+    public static double calculate(double hum, double temp) {
+        if(hum - temp>=0)
+            return hum - temp;
+        else
+            return -(hum - temp);
 
-        System.out.println("습도 - 온도 절댓값 = " + Math.abs(a-b));
-        return Math.abs(a - b);
     }
 
     public static double health(double a,double b,double c) {
