@@ -47,6 +47,7 @@ public class RoadToBiodome06 {
     public static double calculateMedian(int[] array1, int[] array2) {
         int totalLength = array1.length + array2.length;
         if (totalLength % 2 == 1) {
+            //홀수일 경우 중앙값은 두 값크기의 절반 +1이다.
             return findKth(array1, array2, totalLength / 2 + 1);
         } else {
             return (findKth(array1, array2, totalLength / 2) + findKth(array1, array2, totalLength / 2 + 1)) / 2.0;
