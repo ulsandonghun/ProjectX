@@ -69,8 +69,8 @@ public class HelloBiodome04 {
 
     private static double root(double num, double next, double e) {
         double diff = next * next - num;
-        if (diff < 0) diff = -diff;
-
+        if (diff < 0)
+            diff = -diff;
         if (diff < e) {
             return next;
         } else {
