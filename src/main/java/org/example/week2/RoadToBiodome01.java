@@ -14,13 +14,14 @@ public class RoadToBiodome01 {
         for (int i = 0; i < stringArray1.length; i++) {
             array1[i] = Integer.parseInt(stringArray1[i]);
         }
+//        System.out.println(Arrays.toString(stringArray1));
         for (int i : array1) {
             int count = countNum(array1, i);
             if (count == 1) {
                 System.out.println(i);
+                break;
             }
         }
-        System.out.println(list.get(0));
     }
 
     static int countNum(int[] list,int findCountNum) {
