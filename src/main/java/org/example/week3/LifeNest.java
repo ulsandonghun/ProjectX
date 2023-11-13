@@ -6,15 +6,22 @@ import java.util.List;
 public class LifeNest {
 
     private List<Organism> organismList = new ArrayList<>();
-    //검색기능 추가
-    public Organism searchOrganismByName(String name) {
+    private Organism findOrganismByName(String name) {
         for (Organism o : organismList) {
             if (o.name.equals(name)) {
-                System.out.println(o.name + "은 " + o.specy + "이며, " + o.livingfield + "에 서식합니다.");
                 return o;
             }
         }
-       return null;
+        return null;
+    }
+
+    //검색기능 추가
+    public Organism searchOrganismByName(String name) {
+        Organism organism = findOrganismByName(name);
+        if (organism != null) {
+            System.out.println(organism.name + "은 " + organism.specy + "이며, " + organism.livingfield + "에 서식합니다.");
+        }
+        return organism;
     }
 
     public Boolean addOrganism(Organism organism) {
@@ -44,14 +51,13 @@ public class LifeNest {
     }
 
     public Organism changeField(String name, String changefield) {
-        for (int i = 0; i < organismList.size(); i++) {
-            Organism organism = organismList.get(i);
-            if (organism.name.equals(name)) {
-                organismList.get(i).livingfield=changefield;
-                return organism;
-            }
+        Organism organism = findOrganismByName(name);
+        //findOrganismByName 함수가 반환하는 값은 참조값(객체의 주소)
+        //이므로 해당 객체의 값 필드값 변경시 원본 객체도 변경됨.
+        if (organism != null) {
+            organism.livingfield = changefield;
         }
-        return null;
+        return organism;
     }
 
 }
