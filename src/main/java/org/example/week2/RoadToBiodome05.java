@@ -30,6 +30,9 @@ public class RoadToBiodome05 {
     }
 
     public class QuickSort {
+        /*
+            쉽게 설명하면 피봇 기준으로 왼쪽은 피봇보다 작은 수 오른족은 피봇보다 큰 수로 정렬되는 것이다. --최동훈이 적음.
+             */
 
         public static void sort(int[] a) {
             l_pivot_sort(a, 0, a.length - 1);
@@ -69,6 +72,7 @@ public class RoadToBiodome05 {
          * @return		최종적으로 위치한 피벗의 위치(lo)를 반환
          */
         private static int partition(int[] a, int left, int right) {
+
 
             int lo = left;
             int hi = right;

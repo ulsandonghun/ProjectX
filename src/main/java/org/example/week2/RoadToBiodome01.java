@@ -23,7 +23,6 @@ public class RoadToBiodome01 {
             }
         }
     }
-
     static int countNum(int[] list,int findCountNum) {
         int size= list.length;
         int count=0;
