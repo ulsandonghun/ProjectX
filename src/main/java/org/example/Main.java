@@ -1,10 +1,15 @@
 package org.example;
 
-import org.example.week3.LifeNest;
-import org.example.week3.Organism;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
+
+	public static Scanner scan = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		// 멤버 객체 생성
+
+
+	}
+
 }
