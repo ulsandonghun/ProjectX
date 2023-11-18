@@ -87,14 +87,18 @@ public class Flight {
     }
 
     public String showStatus() {
-        // 소요시간 구하기
+        // 날짜가 넘어가는 경우 처리
+        if (this.departureHour > this.arrivalHour || (this.departureHour == this.arrivalHour && this.departureMin > this.arrivalMin)) {
+            this.arrivalHour += 24;
+        }
+        //소요시간 구하기
         this.travelHour = this.arrivalHour-this.departureHour;
         this.travelMin = this.arrivalMin - this.departureMin;
         if(this.travelMin<0) {
             this.travelHour--;
             this.travelMin = 60 + this.travelMin;
         }
-
+        /*모든 시간에서 분이 한자리인 경우 5분이 아니라 05분으로 출력되게 수정*/
         StringBuilder sb = new StringBuilder();
         sb.append("출발일: " + this.day + "일    ");
         if(this.flightCompany.length()==2)
@@ -104,8 +108,8 @@ public class Flight {
         else
             sb.append(" 항공사: "+this.flightCompany + "    ");
         sb.append(this.departure + " -> " + this.destination + "    ");
-        sb.append("비행시간: " + this.departureHour + ":" + this.departureMin + " ~ " + this.arrivalHour + ":" + this.arrivalMin);
-        sb.append("    소요시간: " + this.travelHour + ":" + this.travelMin + "    ");
+        sb.append("비행시간: " + this.departureHour + ":" + String.format("%02d", this.departureMin) + " ~ " + this.arrivalHour + ":" + String.format("%02d", this.arrivalMin));
+        sb.append("    소요시간: " + this.travelHour + ":" + String.format("%02d", this.travelMin) + "    ");
         sb.append("좌석가격: " + this.seatPrice + "원");
 
         return sb.toString();

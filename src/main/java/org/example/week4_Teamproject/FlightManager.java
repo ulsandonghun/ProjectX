@@ -3,6 +3,7 @@ package org.example.week4_Teamproject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -123,14 +124,20 @@ public class FlightManager {
 
     public Flight selectFlight(Flight[] flights) {
         Flight purchaseFlight = new Flight();
+        int num=0;
         if (flights.length > 1) {
             System.out.println("검색된 항공편중 몇번째에 있는 항공편을 선택하실것입니까?");
             for (int i = 0; i < flights.length; i++) {
                 Flight flight = flights[i];
             }
-            System.out.println("몇번을 선택하시겠습니까?");
-            Scanner s = new Scanner(System.in);
-            int num = s.nextInt();
+            try {
+
+                System.out.println("몇번을 선택하시겠습니까?");
+                Scanner s = new Scanner(System.in);
+                 num = s.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("숫자로 입력해 주시기 바랍니다. 올바르지 않은 입력입니다.");
+            }
             purchaseFlight = flights[num + 1];
             return purchaseFlight;
         } else if (flights.length == 1) {

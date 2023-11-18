@@ -6,16 +6,17 @@ import java.util.List;
 public class LifeNest {
 
     private List<Organism> organismList = new ArrayList<>();
+
+    // 이름으로 검색후 객체 반환
     private Organism findOrganismByName(String name) {
         for (Organism o : organismList) {
-            if (o.name.equals(name)) {
+            if (o.name.equals(name))
                 return o;
-            }
         }
         return null;
     }
 
-    //검색기능 추가
+    // 아름으로 검색 후 정보 출력
     public Organism searchOrganismByName(String name) {
         Organism organism = findOrganismByName(name);
         if (organism != null) {
@@ -24,24 +25,19 @@ public class LifeNest {
         return organism;
     }
 
-    public Boolean addOrganism(Organism organism) {
-        if (this.organismList.add(organism)) {
-            System.out.println("[LifeNest] "+organism.name+"가 추가되었습니다.");
-            return true;
-        }else {
-            return false;
-        }
+    // Organism 객체 추가
+    public void addOrganism(Organism organism) {
+        this.organismList.add(organism);
+        System.out.println("[LifeNest] "+organism.name+"가 추가되었습니다.");
     }
 
-    public Boolean deleteOrganism(Organism organism) {
-        if (organismList.remove(organism)) {
-            System.out.println("[LifeNest] " + organism.name + "가 삭제되었습니다.");
-            return true;
-        } else {
-            return false;
-        }
+    // Organism 객체 삭제
+    public void deleteOrganism(Organism organism) {
+        organismList.remove(organism);
+        System.out.println("[LifeNest] " + organism.name + "가 삭제되었습니다.");
     }
 
+    // Organism 객체 출력
     public void printAllOrganisms() {
         System.out.println("전체 동식물 목록 출력 :");
         for (int i = 0; i < organismList.size(); i++) {
@@ -50,6 +46,7 @@ public class LifeNest {
         }
     }
 
+    // 서식지 수정
     public Organism changeField(String name, String changefield) {
         Organism organism = findOrganismByName(name);
         //findOrganismByName 함수가 반환하는 값은 참조값(객체의 주소)
