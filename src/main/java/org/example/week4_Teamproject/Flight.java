@@ -108,11 +108,12 @@ public class Flight {
         else
             sb.append(" 항공사: "+this.flightCompany + "    ");
         sb.append(this.departure + " -> " + this.destination + "    ");
-        sb.append("비행시간: " + this.departureHour + ":" + String.format("%02d", this.departureMin) + " ~ " + this.arrivalHour + ":" + String.format("%02d", this.arrivalMin));
-        sb.append("    소요시간: " + this.travelHour + ":" + String.format("%02d", this.travelMin) + "    ");
+        sb.append("비행시간: " + this.departureHour + ":" + this.departureMin + " ~ " + this.arrivalHour + ":" + this.arrivalMin);
+        sb.append("    소요시간: " + this.travelHour + ":" + this.travelMin + "    ");
         sb.append("좌석가격: " + this.seatPrice + "원");
 
         return sb.toString();
     }
+
 
 }

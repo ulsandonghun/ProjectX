@@ -25,7 +25,7 @@ public class Member {
         System.out.println(str);
     }
 
-    void Discount(int age, String grade, Ticket[] tickets) {
+    void discount(int age, String grade, Ticket[] tickets) {
         for (int i = 0; i < tickets.length; i++) {
             switch (grade) {
                 case "Normal" -> {
@@ -43,6 +43,5 @@ public class Member {
             }
         }
     }
-
 
 }
