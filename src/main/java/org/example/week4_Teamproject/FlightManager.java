@@ -62,27 +62,6 @@ public class FlightManager {
                     result.add(flight);
             }
         }
-        for (int i = 0; i < flights.length; i++) {
-            if (flights[i] == null) {
-                break;
-            }
-            Flight departureFlight = flights[i];
-            if (departureFlight.departure.equals(start) && departureFlight.day == day) {
-                for (int j = 0; j < flights.length; j++) {
-                    if (flights[j] == null) {
-                        break;
-                    }
-                    Flight arrivalFlight = flights[j];
-                    if (arrivalFlight.departure.equals(departureFlight.destination) && arrivalFlight.destination.equals(dest) && arrivalFlight.day == day) {
-                        if((departureFlight.arrivalHour < arrivalFlight.departureHour)){
-
-                            result.add(departureFlight);
-                            result.add(arrivalFlight);
-                        }
-                    }
-                }
-            }
-        }
         return result.toArray(new Flight[0]);
     }
 
@@ -100,6 +79,19 @@ public class FlightManager {
 
     public Flight[] advancedSearchFlightVia(Flight[] flights, String departure, String destination, int day) {
         List<Flight> result = new ArrayList<>();
+        if (!destination.equals("뉴욕")) {
+            System.out.println("도착지가 뉴욕일 경우에만 경유검색을 지원합니다.");
+
+            for (int i = 0; i < flights.length; i++) {
+                if (flights[i] != null) {
+                    Flight flight = flights[i];
+                    if (flight.destination.equals(destination) && flight.departure.equals(departure) && flight.day == day)
+                        result.add(flight);
+                }
+            }
+            return result.toArray(new Flight[0]);
+
+        }
 
         for (int i = 0; i < flights.length; i++) {
             if (flights[i] == null) {
@@ -122,6 +114,7 @@ public class FlightManager {
                 }
             }
         }
+
         return result.toArray(new Flight[0]);
     }
 

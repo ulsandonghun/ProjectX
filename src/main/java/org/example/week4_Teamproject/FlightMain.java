@@ -60,10 +60,25 @@ public class FlightMain {
                         continue;
                     }
                     scan.nextLine();
-                    Flight[] flight = f.searchFlight(f.flights, from, to, day);
-                    for (int i = 0; i < flight.length; i++) {
-                        System.out.println(flight[i].showStatus());
+                    //변경 부분. 기본검색시 경유, 직항 출력 나눠서 인덱스와 같이 출력뒤 배열 합치기
+                    Flight[] directFlights = f.searchFlight(f.flights, from, to, day);
+                    System.out.println("*직항편 목록*");
+                    for (int i = 0; i < directFlights.length; i++) {
+                        System.out.println(directFlights[i].showStatus());
                     }
+                    Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
+
+                    System.out.println("*경유항공편 출력*");
+                    for (int i = 1; i <= viaFlights.length; i++) {
+                        if (i % 2 == 0) {
+                            System.out.println("-------------------------------------------------------------");
+                        }
+                        System.out.println(viaFlights[i]);
+                    }
+                    Flight[] flight = new Flight[directFlights.length + viaFlights.length];
+                    System.arraycopy(directFlights,0,flight,0,directFlights.length);
+                    System.arraycopy(viaFlights,0,flight,directFlights.length,viaFlights.length);
+                    // 위에까지 변경부분.
                     if (flight.length == 0) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");
                     } else {
