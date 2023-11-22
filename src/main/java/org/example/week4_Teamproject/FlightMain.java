@@ -4,8 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FlightMain {
-    private  static Scanner scan=new Scanner(System.in);
-    private static byte viacheck =0;
+    private static Scanner scan = new Scanner(System.in);
+    private static byte viacheck = 0;
 
     public static void main(String[] args) {
         System.out.println("안녕하세요 '항공항공'입니다.");
@@ -65,7 +65,7 @@ public class FlightMain {
                     Flight[] directFlights = f.searchFlight(f.flights, from, to, day);
                     System.out.println("*직항편 목록*");
                     for (int i = 0; i < directFlights.length; i++) {
-                        System.out.println((i+1)+": "+directFlights[i].showStatus());
+                        System.out.println((i + 1) + ": " + directFlights[i].showStatus());
                     }
                     Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
 
@@ -75,17 +75,17 @@ public class FlightMain {
                             if ((i) % 2 == 0) {
                                 System.out.println("-------------------------------------------------------------");
                             }
-                            System.out.println((i+1)+": "+viaFlights[i].showStatus());
+                            System.out.println((i + 1) + ": " + viaFlights[i].showStatus());
                         }
                     }
-                    Flight[] flight=null;
-                    if(viaFlights!=null) {
-                        viacheck =1;// 경유 체크 비트 추가
-                         flight = new Flight[directFlights.length + viaFlights.length];
+                    Flight[] flight = null;
+                    if (viaFlights != null) {
+                        viacheck = 1;// 경유 체크 비트 추가
+                        flight = new Flight[directFlights.length + viaFlights.length];
                         System.arraycopy(directFlights, 0, flight, 0, directFlights.length);
                         System.arraycopy(viaFlights, 0, flight, directFlights.length, viaFlights.length);
-                    }else{
-                         flight=directFlights;
+                    } else {
+                        flight = directFlights;
                     }
                     // 위에까지 변경부분.
                     if (flight.length == 0) {
@@ -117,13 +117,14 @@ public class FlightMain {
                                             System.out.println("만약 직항편 구매를 원하시면 직항검색 기능으로 검색해주세요");
                                             Flight[] flights = f.selectViaFlight(viaFlights);
                                             //주의 경유표만 보는 것이므로, 경유리스트만 파라미터로 추가해야함.
-                                            int cnt=1;
+                                            int cnt = 1;
                                             for (Flight selectedViaFlight : flights) {
-                                                System.out.println("선택된 경유표"+cnt+": "+selectedViaFlight.showStatus());
+                                                System.out.println(
+                                                        "선택된 경유표" + cnt + ": " + selectedViaFlight.showStatus());
                                                 f.purchaseTicket(selectedViaFlight, members[i]);
                                                 cnt++;
                                             }
-                                            viacheck=0;
+                                            viacheck = 0;
                                         }
                                     }
                                     if (i == members.length - 1) {
@@ -164,7 +165,7 @@ public class FlightMain {
                     //변경부분
                     Flight[] flight = f.advancedSearchFlightDirect(f.flights, from, to, day);
 
-                    if (flight== null) {
+                    if (flight == null) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");
                     } else {
                         for (int i = 0; i < flight.length; i++) {
@@ -224,13 +225,22 @@ public class FlightMain {
                     }
                     scan.nextLine();
                     Flight[] flight = f.advancedSearchFlightVia(f.flights, from, to, day);
+                    Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
+
+                    System.out.println("*경유항공편 출력*");
+                    if (viaFlights != null) {
+                        for (int i = 0; i < viaFlights.length; i++) {
+                            if ((i) % 2 == 0) {
+                                System.out.println("-------------------------------------------------------------");
+                            }
+                            System.out.println((i + 1) + ": " + viaFlights[i].showStatus());
+                        }
+                    }
                     //변경부분
-                    if (flight== null) {
+                    if (flight == null) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");
                     } else {
-                        for (int i = 0; i < flight.length; i++) {
-                            System.out.println(flight[i].showStatus());
-                        }
+
                         //변경부분
                         System.out.print("항공권을 구매하실 것입니까? (y/n): ");
                         String select = "";
@@ -242,19 +252,26 @@ public class FlightMain {
                                 name = scan.nextLine();
                                 for (int i = 0; i < members.length; i++) {
                                     if (name.equals(members[i].name)) {
-                                        Flight selectedFlight = f.selectFlight(flight);
-                                        if (selectedFlight != null) {
-                                            f.purchaseTicket(selectedFlight, members[i]);
-                                            break;
-                                        } else {
-                                            break;
+
+                                        System.out.println("경유 노선을 구매합니다. 이경우 출발지 항공편 숫자를 입력하면 두개다 구매 가능합니다.");
+                                        System.out.println("만약 직항편 구매를 원하시면 직항검색 기능으로 검색해주세요");
+                                        Flight[] flights = f.selectViaFlight(viaFlights);
+                                        //주의 경유표만 보는 것이므로, 경유리스트만 파라미터로 추가해야함.
+                                        int cnt = 1;
+                                        for (Flight selectedViaFlight : flights) {
+                                            System.out.println("선택된 경유표" + cnt + ": " + selectedViaFlight.showStatus());
+                                            f.purchaseTicket(selectedViaFlight, members[i]);
+                                            cnt++;
                                         }
+                                        viacheck = 0;
+
                                     }
                                     if (i == members.length - 1) {
                                         System.out.println("일치하는 사용자가 없습니다. 메인화면으로 돌아갑니다.");
                                         continue;
                                     }
                                 }
+                                //경유 구매 로직 추가
                             } else if (select.equals("n")) {
                                 System.out.println("항공편을 구매하지 않습니다. 메인화면으로 돌아갑니다.");
                                 continue;
@@ -341,7 +358,7 @@ public class FlightMain {
                 }
                 case 5: { //특정 항공사 검색
                     System.out.print("검색하고자 하는 항공사를 입력해주세요: ");
-                    String flightcompany=scan.next();
+                    String flightcompany = scan.next();
                     f.searchCompanyFlight(flightcompany);
                     break;
                 }
@@ -389,7 +406,6 @@ public class FlightMain {
                 }
             }
         }
-
 
 
     }
