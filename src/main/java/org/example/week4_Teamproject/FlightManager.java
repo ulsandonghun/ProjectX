@@ -186,7 +186,7 @@ public class FlightManager {
             //경유 항공편 세트중 맨 위 하나만 선택해도 두개 다 구매하도록 변경
             resultselectedViaFlight.add(flights[num - 1]);
             resultselectedViaFlight.add(flights[num]);
-            System.out.println("flights[num-1].showStatus() = " + flights[num-1].showStatus());
+
             f = purchaseFlight;
         } else {
             f = flights[0];

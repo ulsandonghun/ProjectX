@@ -99,6 +99,7 @@ public class FlightMain {
                             if (select.equals("y")) {
                                 System.out.print("사용자 이름을 입력해주세요: ");
                                 name = scan.nextLine();
+                                //변경부분
                                 for (int i = 0; i < members.length; i++) {
                                     if (name.equals(members[i].name)) {
                                         if (viacheck != 1) {
@@ -114,8 +115,15 @@ public class FlightMain {
                                         } else {
                                             System.out.println("경유 노선을 구매합니다. 이경우 출발지 항공편 숫자를 입력하면 두개다 구매 가능합니다.");
                                             System.out.println("만약 직항편 구매를 원하시면 직항검색 기능으로 검색해주세요");
-
-
+                                            Flight[] flights = f.selectViaFlight(viaFlights);
+                                            //주의 경유표만 보는 것이므로, 경유리스트만 파라미터로 추가해야함.
+                                            int cnt=1;
+                                            for (Flight selectedViaFlight : flights) {
+                                                System.out.println("선택된 경유표"+cnt+": "+selectedViaFlight.showStatus());
+                                                f.purchaseTicket(selectedViaFlight, members[i]);
+                                                cnt++;
+                                            }
+                                            viacheck=0;
                                         }
                                     }
                                     if (i == members.length - 1) {
@@ -123,6 +131,7 @@ public class FlightMain {
                                         continue;
                                     }
                                 }
+                                //경유 구매 로직 추가
                             } else if (select.equals("n")) {
                                 System.out.println("항공편을 구매하지 않습니다. 메인화면으로 돌아갑니다.");
                                 continue;
