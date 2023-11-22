@@ -69,18 +69,22 @@ public class FlightMain {
                     Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
 
                     System.out.println("*경유항공편 출력*");
-                    for (int i = 0; i < viaFlights.length; i++) {
-                        if (viaFlights[i] == null) {
-                            break;
+                    if (viaFlights != null) {
+                        for (int i = 0; i < viaFlights.length; i++) {
+                            if ((i) % 2 == 0) {
+                                System.out.println("-------------------------------------------------------------");
+                            }
+                            System.out.println(viaFlights[i].showStatus());
                         }
-                        if ((i) % 2 == 0) {
-                            System.out.println("-------------------------------------------------------------");
-                        }
-                        System.out.println(viaFlights[i].showStatus());
                     }
-                    Flight[] flight = new Flight[directFlights.length + viaFlights.length];
-                    System.arraycopy(directFlights,0,flight,0,directFlights.length);
-                    System.arraycopy(viaFlights,0,flight,directFlights.length,viaFlights.length);
+                    Flight[] flight=null;
+                    if(viaFlights!=null) {
+                         flight = new Flight[directFlights.length + viaFlights.length];
+                        System.arraycopy(directFlights, 0, flight, 0, directFlights.length);
+                        System.arraycopy(viaFlights, 0, flight, directFlights.length, viaFlights.length);
+                    }else{
+                         flight=directFlights;
+                    }
                     // 위에까지 변경부분.
                     if (flight.length == 0) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");

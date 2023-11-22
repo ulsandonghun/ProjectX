@@ -82,14 +82,7 @@ public class FlightManager {
         if (!destination.equals("뉴욕")) {
             System.out.println("도착지가 뉴욕일 경우에만 경유검색을 지원합니다.");
 
-            for (int i = 0; i < flights.length; i++) {
-                if (flights[i] != null) {
-                    Flight flight = flights[i];
-                    if (flight.destination.equals(destination) && flight.departure.equals(departure) && flight.day == day)
-                        result.add(flight);
-                }
-            }
-            return result.toArray(new Flight[0]);
+            return null;
 
         }
 
@@ -156,7 +149,7 @@ public class FlightManager {
                 // 이거 실행되고 어디로 돌아감..?
             }
             purchaseFlight = flights[num - 1];
-            System.out.println("flights[num+1].showStatus() = " + flights[num+1].showStatus());
+            System.out.println("flights[num-1].showStatus() = " + flights[num-1].showStatus());
             f = purchaseFlight;
         } else {
             f = flights[0];
