@@ -142,13 +142,16 @@ public class FlightMain {
                         continue;
                     }
                     scan.nextLine();
+                    //변경부분
                     Flight[] flight = f.advancedSearchFlightDirect(f.flights, from, to, day);
-                    for (int i = 0; i < flight.length; i++) {
-                        System.out.println(flight[i].showStatus());
-                    }
-                    if (flight.length == 0) {
+
+                    if (flight== null) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");
                     } else {
+                        for (int i = 0; i < flight.length; i++) {
+                            System.out.println(flight[i].showStatus());
+                        }
+                        //변경부분
                         System.out.print("항공권을 구매하실 것입니까? (y/n): ");
                         String select = "";
                         String name = "";
