@@ -137,12 +137,13 @@ public class FlightManager {
         Flight f;
         if (flights.length > 1) {
             System.out.print("검색된 항공편중 몇번째에 있는 항공편을 선택하실것입니까: ");
-            for (int i = 0; i < flights.length; i++) {
-                Flight flight = flights[i];
-            }
+//            for (int i = 0; i < flights.length; i++) {
+//                Flight flight = flights[i];
+//            }
             int num = 0;
             try {
                 num = scan.nextInt();
+                System.out.println("num = " + num);
                 int len = flights.length;
                 if(num<1||num>len-1) {
                     System.out.println("입력 범위를 벗어났습니다. 메인화면으로 돌아갑니다.");
@@ -154,7 +155,8 @@ public class FlightManager {
                 scan.nextLine();
                 // 이거 실행되고 어디로 돌아감..?
             }
-            purchaseFlight = flights[num + 1];
+            purchaseFlight = flights[num - 1];
+            System.out.println("flights[num+1].showStatus() = " + flights[num+1].showStatus());
             f = purchaseFlight;
         } else {
             f = flights[0];

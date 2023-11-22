@@ -69,11 +69,14 @@ public class FlightMain {
                     Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
 
                     System.out.println("*경유항공편 출력*");
-                    for (int i = 1; i <= viaFlights.length; i++) {
-                        if (i % 2 == 0) {
+                    for (int i = 0; i < viaFlights.length; i++) {
+                        if (viaFlights[i] == null) {
+                            break;
+                        }
+                        if ((i) % 2 == 0) {
                             System.out.println("-------------------------------------------------------------");
                         }
-                        System.out.println(viaFlights[i]);
+                        System.out.println(viaFlights[i].showStatus());
                     }
                     Flight[] flight = new Flight[directFlights.length + viaFlights.length];
                     System.arraycopy(directFlights,0,flight,0,directFlights.length);
@@ -93,6 +96,7 @@ public class FlightMain {
                                 for (int i = 0; i < members.length; i++) {
                                     if (name.equals(members[i].name)) {
                                         Flight selectedFlight = f.selectFlight(flight);
+                                        System.out.println("선택된 표"+selectedFlight.showStatus());
                                         if (selectedFlight != null) {
                                             f.purchaseTicket(selectedFlight, members[i]);
                                             break;
