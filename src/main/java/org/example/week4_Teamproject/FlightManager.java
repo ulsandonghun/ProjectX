@@ -157,6 +157,43 @@ public class FlightManager {
         return f;
     }
 
+    public Flight[] selectViaFlight(Flight[] flights) {
+        List<Flight> resultselectedViaFlight = new ArrayList<>();
+        Flight purchaseFlight = new Flight();
+        Flight f;
+        if (flights.length > 1) {
+            System.out.print("검색된 경유 항공편중 몇번째에 있는 항공편을 선택하실것입니까: ");
+
+//            for (int i = 0; i < flights.length; i++) {
+//                Flight flight = flights[i];
+//            }
+            int num = 0;
+            try {
+                num = scan.nextInt();
+                System.out.println("num = " + num);
+                int len = flights.length;
+                if(num<1||num>len-1) {
+                    System.out.println("입력 범위를 벗어났습니다. 메인화면으로 돌아갑니다.");
+                    return null;
+
+                }
+            } catch(InputMismatchException e) {
+                System.out.println("메뉴를 확인해주세요. 메인화면으로 돌아갑니다.");
+                scan.nextLine();
+
+            }
+            purchaseFlight = flights[num - 1];
+            //경유 항공편 세트중 맨 위 하나만 선택해도 두개 다 구매하도록 변경
+            resultselectedViaFlight.add(flights[num - 1]);
+            resultselectedViaFlight.add(flights[num]);
+            System.out.println("flights[num-1].showStatus() = " + flights[num-1].showStatus());
+            f = purchaseFlight;
+        } else {
+            f = flights[0];
+        }
+        return resultselectedViaFlight.toArray(new Flight[0]);
+    }
+
     void purchaseTicket(Flight flight,Member member) {
         // 좌석 현황 출력
         flight.showSeat(flight.seat);
