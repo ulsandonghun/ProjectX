@@ -125,6 +125,8 @@ public class FlightMain {
                                                 cnt++;
                                             }
                                             viacheck = 0;
+                                            //구매시 바로 탈출
+                                            break;
                                         }
                                     }
                                     if (i == members.length - 1) {
@@ -224,22 +226,26 @@ public class FlightMain {
                         continue;
                     }
                     scan.nextLine();
-                    Flight[] flight = f.advancedSearchFlightVia(f.flights, from, to, day);
-                    Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
 
-                    System.out.println("*경유항공편 출력*");
-                    if (viaFlights != null) {
-                        for (int i = 0; i < viaFlights.length; i++) {
-                            if ((i) % 2 == 0) {
-                                System.out.println("-------------------------------------------------------------");
-                            }
-                            System.out.println((i + 1) + ": " + viaFlights[i].showStatus());
-                        }
-                    }
+                    Flight[] viaFlights = f.advancedSearchFlightVia(f.flights, from, to, day);
+//                    for (Flight flight : viaFlights) {
+//                        System.out.println("flight.showStatus() = " + flight.showStatus());
+//                    }
+
+
                     //변경부분
-                    if (flight == null) {
+                    if (viaFlights == null) {
                         System.out.println("검색된 항공편이 없습니다. 메인화면으로 돌아갑니다.");
                     } else {
+                        System.out.println("*경유항공편 출력*");
+                        if (viaFlights != null) {
+                            for (int i = 0; i < viaFlights.length; i++) {
+                                if ((i) % 2 == 0) {
+                                    System.out.println("-------------------------------------------------------------");
+                                }
+                                System.out.println((i + 1) + ": " + viaFlights[i].showStatus());
+                            }
+                        }
 
                         //변경부분
                         System.out.print("항공권을 구매하실 것입니까? (y/n): ");
@@ -264,6 +270,7 @@ public class FlightMain {
                                             cnt++;
                                         }
                                         viacheck = 0;
+                                        break;
 
                                     }
                                     if (i == members.length - 1) {

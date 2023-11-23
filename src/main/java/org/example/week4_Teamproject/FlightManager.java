@@ -107,7 +107,9 @@ public class FlightManager {
                 }
             }
         }
-
+        if (result.size() == 0) {
+            return null;
+        }
         return result.toArray(new Flight[0]);
     }
 
@@ -195,6 +197,9 @@ public class FlightManager {
 
         } else {
 
+            resultselectedViaFlight.add(flights[0]);
+
+            return resultselectedViaFlight.toArray(new Flight[0]);
         }
         return resultselectedViaFlight.toArray(new Flight[0]);
     }
