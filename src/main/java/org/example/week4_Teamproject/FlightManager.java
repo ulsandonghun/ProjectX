@@ -159,8 +159,7 @@ public class FlightManager {
 
     public Flight[] selectViaFlight(Flight[] flights) {
         List<Flight> resultselectedViaFlight = new ArrayList<>();
-        Flight purchaseFlight = new Flight();
-        Flight f;
+
         if (flights.length > 1) {
             System.out.print("검색된 경유 항공편중 몇번째에 있는 항공편을 선택하실것입니까: ");
 
@@ -182,14 +181,20 @@ public class FlightManager {
                 scan.nextLine();
 
             }
-            purchaseFlight = flights[num - 1];
-            //경유 항공편 세트중 맨 위 하나만 선택해도 두개 다 구매하도록 변경
-            resultselectedViaFlight.add(flights[num - 1]);
-            resultselectedViaFlight.add(flights[num]);
 
-            f = purchaseFlight;
+            //경유 항공편 둘다 구매 예외처리
+            if ((num % 2) == 1) {
+
+                resultselectedViaFlight.add(flights[num - 1]);
+                resultselectedViaFlight.add(flights[num]);
+            }else{
+                resultselectedViaFlight.add(flights[num-2]);
+                resultselectedViaFlight.add(flights[num-1]);
+            }
+
+
         } else {
-            f = flights[0];
+
         }
         return resultselectedViaFlight.toArray(new Flight[0]);
     }
